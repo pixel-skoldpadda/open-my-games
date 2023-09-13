@@ -38,7 +38,7 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
             while (_serviceLevelSelection.CurrentLevelIndex != index)
             {
                 var levelIndex = _serviceLevelSelection.CurrentLevelIndex;
-                GridFillWords model = models[levelIndex - 1];
+                var model = models[levelIndex - 1];
                 if (model != null)
                 {
                     return model;
