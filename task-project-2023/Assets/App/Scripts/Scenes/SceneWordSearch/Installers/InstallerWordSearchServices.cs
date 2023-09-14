@@ -2,6 +2,7 @@
 using App.Scripts.Libs.Factory;
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.ServiceLocator;
+using App.Scripts.Scenes.SceneWordSearch.Config;
 using App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel;
 using App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel.ProviderWordLevel;
 using App.Scripts.Scenes.SceneWordSearch.Features.Level.LevelContainer;
@@ -13,6 +14,7 @@ namespace App.Scripts.Scenes.SceneWordSearch.Installers
     public class InstallerWordSearchServices : MonoInstaller
     {
         [SerializeField] private ConfigLevelSelection configLevelSelection;
+        [SerializeField] private ConfigSearchWordLevelData configSearchWordLevelData;
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
@@ -23,7 +25,7 @@ namespace App.Scripts.Scenes.SceneWordSearch.Installers
         {
             container.SetService<IServiceLevelSelection, ServiceLevelSelection>(
                 new ServiceLevelSelection(configLevelSelection));
-            container.SetService<IProviderWordLevel, ProviderWordLevel>(new ProviderWordLevel());
+            container.SetService<IProviderWordLevel, ProviderWordLevel>(new ProviderWordLevel(configSearchWordLevelData));
             container.SetService<IFactory<LevelModel, LevelInfo, int>, FactoryLevelModel>(new FactoryLevelModel());
             container.SetServiceSelf(new LevelContainer());
         }

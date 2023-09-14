@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using App.Scripts.Libs.Factory;
 using App.Scripts.Scenes.SceneWordSearch.Features.Level.Models.Level;
@@ -21,8 +20,25 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel
 
         private List<char> BuildListChars(List<string> words)
         {
-            //напиши реализацию не меняя сигнатуру функции
-            throw new NotImplementedException();
+            var chars = new List<char>(words[0].ToCharArray());
+            for (var i = 1; i < words.Count; i++)
+            {
+                var charArray =  words[i].ToCharArray();
+
+                var copy = new List<char>(chars);
+                foreach (var ch in charArray)
+                {
+                    if (copy.Contains(ch))
+                    {
+                        copy.Remove(ch);
+                    }
+                    else
+                    {
+                        chars.Add(ch);
+                    }
+                }
+            }
+            return chars;
         }
     }
 }
