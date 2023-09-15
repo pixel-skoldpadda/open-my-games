@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using App.Scripts.Infrastructure.LevelSelection;
 using App.Scripts.Scenes.SceneFillwords.Config;
 using App.Scripts.Scenes.SceneFillwords.Features.FillwordModels;
@@ -51,8 +50,8 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
 
         private void loadLevels(ConfigLevelSelection levelSelection, ConfigFillwordLevelData fillwordLevelData)
         {
-            var dictionary = File.ReadAllLines(fillwordLevelData.wordsDictionaryFilePath);
-            var levels = File.ReadAllLines(fillwordLevelData.levelsFilePath);
+            var dictionary = LoadTextResource(fillwordLevelData.wordsDictionaryResourcePath);
+            var levels = LoadTextResource(fillwordLevelData.levelsResourcePath);
             
             for (var i = 0; i < levelSelection.TotalLevelCount; i++)
             {
@@ -108,6 +107,12 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
             }
 
             return grid;
+        }
+
+        private static string[] LoadTextResource(string path)
+        {
+            var textAsset = Resources.Load<TextAsset>(path);
+            return textAsset.text.Split("\r\n");
         }
 
         private static bool IsPerfectSquare(int number)

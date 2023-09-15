@@ -571,8 +571,8 @@ MonoBehaviour:
     TotalLevelCount: 3
     InitLevelIndex: 1
   fillwordLevelData:
-    wordsDictionaryFilePath: Assets/App/Resources/Fillwords/words_list.txt
-    levelsFilePath: Assets/App/Resources/Fillwords/pack_0.txt
+    wordsDictionaryResourcePath: Fillwords/words_list
+    levelsResourcePath: Fillwords/pack_0
 --- !u!1 &1109098107
 GameObject:
   m_ObjectHideFlags: 0
