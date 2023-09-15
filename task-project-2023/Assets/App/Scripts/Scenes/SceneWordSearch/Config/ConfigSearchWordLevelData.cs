@@ -5,6 +5,6 @@ namespace App.Scripts.Scenes.SceneWordSearch.Config
     [Serializable]
     public class ConfigSearchWordLevelData
     {
-        public string levelsDirectoryPath;
+        public string levelsResourcesPath;
     }
 }
