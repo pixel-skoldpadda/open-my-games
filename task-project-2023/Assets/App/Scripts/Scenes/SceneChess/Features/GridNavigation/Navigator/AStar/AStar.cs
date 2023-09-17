@@ -7,14 +7,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator.AStar
 {
     public class AStar
     {
-        private readonly ChessGrid _grid;
-
-        public AStar(ChessGrid grid)
-        {
-            _grid = grid;
-        }
-
-        public List<Vector2Int> FindPath(Vector2Int from, Vector2Int to, List<Vector2Int> movePattern)
+        public List<Vector2Int> FindPath(Vector2Int from, Vector2Int to, ChessGrid grid, List<Vector2Int> movePattern)
         {
             var startNode = new Node(from);
             var endNode = new Node(to);
@@ -33,7 +26,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator.AStar
                 reachable.Remove(node);
                 explored.Add(node);
 
-                var adjacentNodes = GetAdjacentNodes(node, explored, movePattern);
+                var adjacentNodes = GetAdjacentNodes(node, explored, movePattern, grid);
                 for (var i = 0; i < adjacentNodes.Count; i++)
                 {
                     Node adjacentNode = adjacentNodes[i];
@@ -52,7 +45,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator.AStar
             return null;
         }
 
-        private List<Node> GetAdjacentNodes(Node node, List<Node> explored, IReadOnlyList<Vector2Int> movePattern)
+        private List<Node> GetAdjacentNodes(Node node, List<Node> explored, IReadOnlyList<Vector2Int> movePattern, ChessGrid grid)
         {
             var adjacentNodes = new List<Node>();
             var position = node.Position;
@@ -65,7 +58,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator.AStar
                     continue;
                 }
                 
-                if (CanMoveTo(adjacentPosition))
+                if (CanMoveTo(adjacentPosition, grid))
                 {
                     adjacentNodes.Add(new Node(adjacentPosition));
                 }
@@ -73,19 +66,19 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator.AStar
             return adjacentNodes;
         }
 
-        private bool CanMoveTo(Vector2Int position)
+        private bool CanMoveTo(Vector2Int position, ChessGrid grid)
         {
-            if (IsPositionExists(position))
+            if (IsPositionExists(position, grid))
             {
-                var chessUnit = _grid.Get(position);
+                var chessUnit = grid.Get(position);
                 return chessUnit == null || chessUnit.IsAvailable;
             }
             return false;
         }
 
-        private bool IsPositionExists(Vector2Int position)
+        private bool IsPositionExists(Vector2Int position, ChessGrid grid)
         {
-            var size = _grid.Size;
+            var size = grid.Size;
             var x = position.x;
             var y = position.y;
 
