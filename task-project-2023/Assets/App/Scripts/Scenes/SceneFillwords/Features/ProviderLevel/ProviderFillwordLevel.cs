@@ -59,7 +59,7 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
             }
         }
 
-        private static GridFillWords parseLevel(string level, IReadOnlyList<string> dictionary)
+        private GridFillWords parseLevel(string level, IReadOnlyList<string> dictionary)
         {
             var chars = new Dictionary<int, char>(); 
             
@@ -109,13 +109,13 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
             return grid;
         }
 
-        private static string[] LoadTextResource(string path)
+        private string[] LoadTextResource(string path)
         {
             var textAsset = Resources.Load<TextAsset>(path);
             return textAsset.text.Split("\r\n");
         }
 
-        private static bool IsPerfectSquare(int number)
+        private bool IsPerfectSquare(int number)
         {
             var odd = 1;
             while (number > 0)

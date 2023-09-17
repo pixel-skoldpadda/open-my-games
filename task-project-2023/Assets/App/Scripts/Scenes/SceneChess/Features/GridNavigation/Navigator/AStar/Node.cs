@@ -4,7 +4,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator.AStar
 {
     public class Node
     {
-        public Vector2Int Position { get; set; }
+        public Vector2Int Position { get; }
         public Node Previous { get; set; }
         public int Weight { get; set; }
 

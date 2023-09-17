@@ -29,7 +29,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator.AStar
                 var adjacentNodes = GetAdjacentNodes(node, explored, movePattern, grid);
                 for (var i = 0; i < adjacentNodes.Count; i++)
                 {
-                    Node adjacentNode = adjacentNodes[i];
+                    var adjacentNode = adjacentNodes[i];
                     if (!reachable.Contains(adjacentNode))
                     {
                         reachable.Add(adjacentNode);
@@ -45,7 +45,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator.AStar
             return null;
         }
 
-        private List<Node> GetAdjacentNodes(Node node, List<Node> explored, IReadOnlyList<Vector2Int> movePattern, ChessGrid grid)
+        private List<Node> GetAdjacentNodes(Node node, IReadOnlyList<Node> explored, IReadOnlyList<Vector2Int> movePattern, ChessGrid grid)
         {
             var adjacentNodes = new List<Node>();
             var position = node.Position;
@@ -85,7 +85,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator.AStar
             return x >= 0 && x < size.x && y >= 0 && y < size.y;
         }
 
-        private static bool IsExploredPosition(Vector2Int position, IReadOnlyList<Node> explored)
+        private bool IsExploredPosition(Vector2Int position, IReadOnlyList<Node> explored)
         {
             for (var i = 0; i < explored.Count; i++)
             {
@@ -97,7 +97,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator.AStar
             return false;
         }
         
-        private static List<Vector2Int> BuildPath(Node node, Node starNode)
+        private List<Vector2Int> BuildPath(Node node, Node starNode)
         {
             var path = new List<Vector2Int>();
             while (node.Position != starNode.Position)
@@ -108,7 +108,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator.AStar
             return path;
         }
 
-        private static Node ChooseNextNode(IReadOnlyList<Node> reachable, Node endNode)
+        private Node ChooseNextNode(IReadOnlyList<Node> reachable, Node endNode)
         {
             Node node = null;
             var minWeight = -1;
@@ -127,7 +127,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator.AStar
             return node;
         }
 
-        private static int EstimateManhattanDistance(Node node, Node endNode)
+        private int EstimateManhattanDistance(Node node, Node endNode)
         {
             var position = node.Position;
             var endNPosition = endNode.Position;

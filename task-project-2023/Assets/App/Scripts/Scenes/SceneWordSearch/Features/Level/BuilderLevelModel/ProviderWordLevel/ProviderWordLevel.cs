@@ -14,6 +14,11 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel.Pr
             LoadAllLevels(searchWordLevelData);
         }
 
+        public LevelInfo LoadLevelData(int levelIndex)
+        {
+            return _levels[levelIndex - 1];
+        }
+
         private void LoadAllLevels(ConfigSearchWordLevelData searchWordLevelData)
         {
             var textAssets = Resources.LoadAll<TextAsset>(searchWordLevelData.levelsResourcesPath);
@@ -21,11 +26,6 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel.Pr
             {
                 _levels[i] = JsonUtility.FromJson<LevelInfo>(textAssets[i].text);
             }
-        }
-
-        public LevelInfo LoadLevelData(int levelIndex)
-        {
-            return _levels[levelIndex - 1];
         }
     }
 }

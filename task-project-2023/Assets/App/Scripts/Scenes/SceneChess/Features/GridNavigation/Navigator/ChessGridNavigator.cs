@@ -20,7 +20,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
             return CanMoveChessTo(unit, from, to) ? _aStar.FindPath(from, to, grid, GetChessMovePattern(unit)) : null;
         }
 
-        private static bool CanMoveChessTo(ChessUnitType unit, Vector2Int from, Vector2Int to)
+        private bool CanMoveChessTo(ChessUnitType unit, Vector2Int from, Vector2Int to)
         {
             return unit switch
             {
@@ -30,17 +30,17 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
             };
         }
 
-        private static bool CanMovePawn(Vector2Int from, Vector2Int to)
+        private bool CanMovePawn(Vector2Int from, Vector2Int to)
         {
             return from.x == to.x;
         }
 
-        private static bool CanMoveBishop(Vector2Int from, Vector2Int to)
+        private bool CanMoveBishop(Vector2Int from, Vector2Int to)
         {
             return (from.x + from.y % 2) % 2 == (to.x + to.y % 2) % 2;
         }
 
-        private static List<Vector2Int> GetChessMovePattern(ChessUnitType unit)
+        private List<Vector2Int> GetChessMovePattern(ChessUnitType unit)
         {
             switch (unit)
             {
@@ -66,7 +66,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
             }
         }
 
-        private static List<Vector2Int> GetKnightMovePattern()
+        private List<Vector2Int> GetKnightMovePattern()
         {
             return new List<Vector2Int>(new[]
             {
@@ -81,7 +81,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
             });
         }
 
-        private static List<Vector2Int> GetPawnMovePattern()
+        private List<Vector2Int> GetPawnMovePattern()
         {
             return new List<Vector2Int>(new[]
             {
@@ -101,7 +101,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
             });
         }
 
-        private static List<Vector2Int> GetRookMovePattern()
+        private List<Vector2Int> GetRookMovePattern()
         {
             return new List<Vector2Int>(new[]
             {
